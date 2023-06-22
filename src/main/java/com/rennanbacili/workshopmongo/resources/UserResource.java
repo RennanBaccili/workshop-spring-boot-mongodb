@@ -46,4 +46,11 @@ public class UserResource {
 		return ResponseEntity.created(uri).build();
 		// boas praticas, ele retorna codigo 201 e o url
 	}
+	@RequestMapping(value= "/{id}",method=RequestMethod.DELETE) // metodo get é para obter informaçoes
+	public ResponseEntity<Void> delete(@PathVariable String id) { // response entity encapsula toda a estruta necessaria para retornar estrutura http
+		service.delete(id); // para encontrar id
+
+		return ResponseEntity.noContent().build();
+	}
+	
 }
