@@ -36,6 +36,22 @@ public class UserService {
 		repo.deleteById(id);
 	}
 	
+	public User update(User obj) {
+		// primeiro passo eu instancio o obj e vou buscalo no banco de dados
+		User newObj = findById(obj.getId());
+		// vou buscalo para atualizalo
+		//metodo para atualizar o novo obj e o obj que foi passado
+		updateData(newObj, obj);
+		// para poder salvar o obj novo
+		return repo.save(newObj);
+		}
+	
+	private void updateData(User newObj, User obj) {
+		newObj.setName(obj.getName());
+		newObj.setEmail(obj.getEmail());
+		
+	}
+
 	// por motivos de manutenlção futura o from DTO vai ficar na classe service
 	public User fromDTO(UserDTO objDTO) {
 		return new User(objDTO.getId(), objDTO.getName(), objDTO.getEmail());

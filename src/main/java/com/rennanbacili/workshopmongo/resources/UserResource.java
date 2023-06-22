@@ -52,5 +52,16 @@ public class UserResource {
 
 		return ResponseEntity.noContent().build();
 	}
+	@RequestMapping(value= "/{id}",method=RequestMethod.PUT) 
+	public ResponseEntity<UserDTO> update(@RequestBody UserDTO objDTO, @PathVariable String id) { // response entity encapsula toda a estruta necessaria para retornar estrutura http
+		User obj = service.fromDTO(objDTO);// para encontrar id
+		obj.setId(id);
+		obj = service.update(obj);
+		// vai pegar o objeto do novo endereço 
+		return ResponseEntity.noContent().build();
+		// boas praticas, ele retorna codigo 201 e o url
+	}
+	
+	
 	
 }
