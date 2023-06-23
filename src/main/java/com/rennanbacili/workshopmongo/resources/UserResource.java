@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.rennanbacili.workshopmongo.domain.Post;
 import com.rennanbacili.workshopmongo.domain.User;
 import com.rennanbacili.workshopmongo.dto.UserDTO;
 import com.rennanbacili.workshopmongo.services.UserService;
@@ -62,6 +63,11 @@ public class UserResource {
 		// boas praticas, ele retorna codigo 201 e o url
 	}
 	
-	
+	@RequestMapping(value= "/{id}/posts",method=RequestMethod.GET) // metodo get é para obter informaçoes
+	public ResponseEntity<List<Post>> findPosts(@PathVariable String id) { // response entity encapsula toda a estruta necessaria para retornar estrutura http
+		User obj =service.findById(id); // para encontrar id
+
+		return ResponseEntity.ok().body(obj.getPosts());
+	}
 	
 }
